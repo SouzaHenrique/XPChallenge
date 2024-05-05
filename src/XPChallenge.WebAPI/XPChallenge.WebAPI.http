@@ -1,0 +1,6 @@
+@XPChallenge.WebAPI_HostAddress = http://localhost:5098
+
+GET {{XPChallenge.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
