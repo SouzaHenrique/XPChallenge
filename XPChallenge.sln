@@ -21,7 +21,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XPChallenge.Infrastructure"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XPChallenge.WebAPI", "src\XPChallenge.WebAPI\XPChallenge.WebAPI.csproj", "{4EE8DA53-961D-4874-8CB6-3C3CFE68D96E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XPChallenge.Application.UnitTest", "XPChallenge.Application.UnitTest\XPChallenge.Application.UnitTest.csproj", "{6FFDF80D-45E2-49A4-9860-83734A8DB27A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XPChallenge.Application.UnitTest", "src\XPChallenge.Application.UnitTest\XPChallenge.Application.UnitTest.csproj", "{6FFDF80D-45E2-49A4-9860-83734A8DB27A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XPChallenge.WebAPI.IntegrationTest", "src\XPChallenge.WebAPI.IntegrationTest\XPChallenge.WebAPI.IntegrationTest.csproj", "{405F7B5F-41D6-4825-A337-32C38BAD1C79}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XPChallenge.Infrastructure.IntegrationTests", "src\XPChallenge.Infrastructure.IntegrationTests\XPChallenge.Infrastructure.IntegrationTests.csproj", "{5524F2FB-FC83-45A8-8A07-6F6C0A2644CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XPChallenge.Tests.Shared", "XPChallenge.Tests.Shared\XPChallenge.Tests.Shared.csproj", "{62B2A610-CAEC-4EA5-9239-44F86D9BD6BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +55,18 @@ Global
 		{6FFDF80D-45E2-49A4-9860-83734A8DB27A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FFDF80D-45E2-49A4-9860-83734A8DB27A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FFDF80D-45E2-49A4-9860-83734A8DB27A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{405F7B5F-41D6-4825-A337-32C38BAD1C79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{405F7B5F-41D6-4825-A337-32C38BAD1C79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{405F7B5F-41D6-4825-A337-32C38BAD1C79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{405F7B5F-41D6-4825-A337-32C38BAD1C79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5524F2FB-FC83-45A8-8A07-6F6C0A2644CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5524F2FB-FC83-45A8-8A07-6F6C0A2644CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5524F2FB-FC83-45A8-8A07-6F6C0A2644CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5524F2FB-FC83-45A8-8A07-6F6C0A2644CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62B2A610-CAEC-4EA5-9239-44F86D9BD6BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62B2A610-CAEC-4EA5-9239-44F86D9BD6BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62B2A610-CAEC-4EA5-9239-44F86D9BD6BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62B2A610-CAEC-4EA5-9239-44F86D9BD6BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +81,9 @@ Global
 		{AFEA513E-E199-487F-8958-C90B94848A37} = {336191CC-2DA2-4584-A919-7A3E9FCF782B}
 		{4EE8DA53-961D-4874-8CB6-3C3CFE68D96E} = {E634AAFE-BBDD-4F90-9380-8185ACF6D944}
 		{6FFDF80D-45E2-49A4-9860-83734A8DB27A} = {27E66405-FE91-412C-BDEC-F87C7A9F9935}
+		{405F7B5F-41D6-4825-A337-32C38BAD1C79} = {27E66405-FE91-412C-BDEC-F87C7A9F9935}
+		{5524F2FB-FC83-45A8-8A07-6F6C0A2644CC} = {27E66405-FE91-412C-BDEC-F87C7A9F9935}
+		{62B2A610-CAEC-4EA5-9239-44F86D9BD6BF} = {27E66405-FE91-412C-BDEC-F87C7A9F9935}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4EDFEB51-606A-427C-A9F3-E31D0CEAC204}

@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.Core" Version="5.6.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\XPChallenge.Application\XPChallenge.Application.csproj" />
+    <ProjectReference Include="..\XPChallenge.Infrastructure\XPChallenge.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
