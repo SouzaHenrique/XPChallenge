@@ -1,12 +1,12 @@
 namespace XPChallenge.Application.UnitTest.Customer;
 public class CustomerCommandsShould
 {
-    private readonly Mock<ICustomerRepoitory> _customerRepository;
+    private readonly Mock<ICustomerRepository> _customerRepository;
     private readonly Mock<IFinancialProductRepository> _financialProductRepository;
 
     public CustomerCommandsShould()
     {
-        _customerRepository = new Mock<ICustomerRepoitory>();
+        _customerRepository = new Mock<ICustomerRepository>();
         _financialProductRepository = new Mock<IFinancialProductRepository>();
     }
 
