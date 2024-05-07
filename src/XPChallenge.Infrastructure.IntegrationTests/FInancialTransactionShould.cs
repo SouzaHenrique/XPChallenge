@@ -1,8 +1,6 @@
 using XPChallenge.Domain.Enums;
 
-
 #pragma warning disable CA2007
-
 
 namespace XPChallenge.Infrastructure.IntegrationTests;
 public class FInancialTransactionShould : IClassFixture<IntegrationTestShell>

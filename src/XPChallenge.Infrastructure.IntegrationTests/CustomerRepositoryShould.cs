@@ -2,7 +2,6 @@ namespace XPChallenge.Infrastructure.IntegrationTests;
 
 #pragma warning disable CA2007
 
-
 public class CustomerRepositoryShould : IClassFixture<IntegrationTestShell>
 {
     readonly IntegrationTestShell Shell;

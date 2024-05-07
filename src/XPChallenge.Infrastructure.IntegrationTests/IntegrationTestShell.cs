@@ -1,6 +1,3 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
 using EphemeralMongo;
 using MongoDB.Driver;
 using XPChallenge.Tests.Shared;
@@ -30,6 +27,8 @@ public class IntegrationTestShell : IDisposable
 
         client = new MongoClient(mongoRunner.ConnectionString);
         client.DropDatabase("DbIntegrationTest");
+
+        MongoClassMapers.RegisterMaps();
 
         mongoDatabase = client.GetDatabase("DbIntegrationTest");
     }
