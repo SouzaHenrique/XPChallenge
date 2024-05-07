@@ -1,5 +1,4 @@
 using MongoDB.Driver.Linq;
-using XPChallenge.Application.Contracts.Infrastructure.Persistance;
 using XPChallenge.Domain.Commom.Models;
 
 namespace XPChallenge.Infrastructure.Persistance;
@@ -9,6 +8,7 @@ public class RepositoryBase<T>(IMongoDatabase mongoDatabase) : IGenericRepositor
 
     public Task<T> Add(T entity, CancellationToken cancellationToken)
     {
+        entity.SetCreationDate(DateTime.UtcNow);
         _collection.InsertOneAsync(entity, null, cancellationToken);
         return Task.FromResult(entity);
     }
@@ -40,6 +40,7 @@ public class RepositoryBase<T>(IMongoDatabase mongoDatabase) : IGenericRepositor
     public Task Update(T entity, CancellationToken cancellationToken)
     {
         var filter = Builders<T>.Filter.Eq(x => x.Id, entity.Id);
+        entity.SetUpdateDate(DateTime.Now);
         return _collection.ReplaceOneAsync(filter, entity, cancellationToken: cancellationToken);
     }
 }
