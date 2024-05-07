@@ -1,4 +1,7 @@
 namespace XPChallenge.Infrastructure.IntegrationTests;
+
+#pragma warning disable CA2007
+
 public class FinancialProductShould : IClassFixture<IntegrationTestShell>
 {
     readonly IntegrationTestShell Shell;
