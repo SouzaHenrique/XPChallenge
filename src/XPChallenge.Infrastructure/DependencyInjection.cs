@@ -44,26 +44,29 @@ public static class DependencyInjection
         });
 
         services.AddRepositories();
+
+        MongoClassMapers.RegisterMaps();
     }
 
     private static void AddRepositories(this IServiceCollection services)
     {
-        typeof(RepositoryBase<>).Assembly.GetTypes()
+        var typesToRegister = typeof(RepositoryBase<>).Assembly.GetTypes()
             .Where(x => x.Namespace == "XPChallenge.Infrastructure.Persistance")
             .Where(x => x.IsAbstract == false)
-            .ToList()
-            .ForEach(x =>
+            .ToList();
+
+        foreach (var type in typesToRegister)
+        {
+            var @interface = type.GetInterfaces().LastOrDefault(i => i.Name.Contains(type.Name));
+            if (@interface is not null)
             {
-                var @interface = x.GetInterfaces().LastOrDefault(i => i.Name.Contains(x.Name));
-                if (@interface is not null)
+                services.AddScoped(@interface, provider =>
                 {
-                    services.TryAddScoped(@interface, provider =>
-                    {
-                        var database = provider.GetRequiredService<IMongoDatabase>();
-                        var instance = Activator.CreateInstance(x, database);
-                        return instance;
-                    });
-                }
-            });
+                    var database = provider.GetRequiredService<IMongoDatabase>();
+                    var instance = Activator.CreateInstance(type, database);
+                    return instance;
+                });
+            }
+        }
     }
 }
