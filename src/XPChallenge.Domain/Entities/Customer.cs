@@ -1,23 +1,22 @@
 using XPChallenge.Domain.Commom.Models;
-
 namespace XPChallenge.Domain.Entities;
 public class Customer : DomainEntity
 {
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
     public decimal Balance { get; private set; }
-    public IEnumerable<Guid> PurchasedProducts { get; private set; }
+    public IEnumerable<PurchasedProductValueObject> PurchasedProducts { get; private set; }
 
-    public Customer(string firstName, string lastName, decimal balance, IEnumerable<Guid> purchasedProducts)
+    public Customer(string firstName, string lastName, decimal balance, IEnumerable<PurchasedProductValueObject> purchasedProducts)
     {
         FirstName = firstName;
-        LastName = LastName;
+        LastName = lastName;
         Balance = balance;
         PurchasedProducts = purchasedProducts;
     }
 
     [BsonConstructor]
-    public Customer(Guid id, string firstName, string lastName, decimal balance, IEnumerable<Guid> purchasedProducts)
+    public Customer(Guid id, string firstName, string lastName, decimal balance, IEnumerable<PurchasedProductValueObject> purchasedProducts)
     {
         Id = id;
         FirstName = firstName;
@@ -26,28 +25,69 @@ public class Customer : DomainEntity
         PurchasedProducts = purchasedProducts;
     }
 
-    public void AddProduct(Guid productId)
+    public void PurchaseFinancialProduct(FinancialProduct purchasedProduct, int quantity)
     {
-        PurchasedProducts = PurchasedProducts.Append(productId);
+        PurchasedProducts ??= [];
+
+        var product = PurchasedProducts.FirstOrDefault(x => x.FinancialProductID == purchasedProduct.Id);
+
+        if (product is null)
+        {
+            PurchasedProducts = PurchasedProducts.Append(new PurchasedProductValueObject(purchasedProduct, quantity));
+            Balance -= (quantity * purchasedProduct.CurrentPurchasePrice);
+        }
+        else
+        {
+            product.Quantity += quantity;
+            Balance -= (quantity * purchasedProduct.CurrentPurchasePrice);
+        }
     }
 
-    public void RemoveProduct(Guid productId)
+    public void SellFinancialProduct(Guid financialProductID, int quantity, decimal pricePerUnit)
     {
-        PurchasedProducts = PurchasedProducts.Where(x => x != productId);
+        PurchasedProducts ??= [];
+
+        var product = PurchasedProducts.FirstOrDefault(x => x.FinancialProductID == financialProductID);
+
+        if (product is not null)
+        {
+            Balance += (quantity * pricePerUnit);
+            product.Quantity -= quantity;
+
+            if (product.Quantity <= 0)
+            {
+                PurchasedProducts = PurchasedProducts.Where(x => x.FinancialProductID != financialProductID);
+            }
+        }
     }
 
-    public void UpdateBalance(decimal amount)
+    public void IncreaseBalanceIn(decimal amount)
     {
+        if (Balance <= 0)
+        {
+            return;
+        }
+
         Balance += amount;
     }
 
     public void UpdateFirstName(string firstName)
     {
+        if (string.IsNullOrEmpty(firstName))
+        {
+            return;
+        }
+
         FirstName = firstName;
     }
 
     public void UpdateLastName(string lastName)
     {
+        if (string.IsNullOrEmpty(lastName))
+        {
+            return;
+        }
+
         LastName = lastName;
     }
 }

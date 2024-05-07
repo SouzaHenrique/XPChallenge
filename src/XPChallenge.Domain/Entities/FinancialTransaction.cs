@@ -20,7 +20,6 @@ public class FinancialTransaction : DomainEntity
         UnitPrice = unitPrice;
         TransactionDate = transactionDate;
         CustomerID = customerID;
-
     }
 
     [BsonConstructor]
