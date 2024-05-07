@@ -8,7 +8,7 @@ public class PurchaseFinancialProductCommand : IRequest<string>
     public Guid FinancialProductId { get; set; }
     public int Quantity { get; set; }
 
-    public class PurchaseFinancialProductCommandHandler(ICustomerRepoitory customerRepository, IFinancialProductRepository financialProductRepository)
+    public class PurchaseFinancialProductCommandHandler(ICustomerRepository customerRepository, IFinancialProductRepository financialProductRepository)
         : IRequestHandler<PurchaseFinancialProductCommand, string>
     {
 

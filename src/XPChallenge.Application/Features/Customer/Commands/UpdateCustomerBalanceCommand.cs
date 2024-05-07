@@ -12,7 +12,7 @@ public class UpdateCustomerBalanceCommand : IRequest<string>
         customer.IncreaseBalanceIn(Amount);
     }
 
-    public class UpdateCustomerBalanceCommandHandler(ICustomerRepoitory customerRepoitory) : IRequestHandler<UpdateCustomerBalanceCommand, string>
+    public class UpdateCustomerBalanceCommandHandler(ICustomerRepository customerRepoitory) : IRequestHandler<UpdateCustomerBalanceCommand, string>
     {
         public async Task<string> Handle(UpdateCustomerBalanceCommand request, CancellationToken cancellationToken)
         {

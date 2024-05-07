@@ -13,7 +13,7 @@ public class CreateCustomerCommand : IRequest<CreateCustomerResponse>
         return new Domain.Entities.Customer(FirstName, LastName, Balance, []);
     }
 
-    public class CreateCustomerCommandHandler(ICustomerRepoitory customerRepoitory) : IRequestHandler<CreateCustomerCommand, CreateCustomerResponse>
+    public class CreateCustomerCommandHandler(ICustomerRepository customerRepoitory) : IRequestHandler<CreateCustomerCommand, CreateCustomerResponse>
     {
         public async Task<CreateCustomerResponse> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
         {

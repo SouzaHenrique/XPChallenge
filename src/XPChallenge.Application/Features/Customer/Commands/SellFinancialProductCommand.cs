@@ -8,7 +8,7 @@ public class SellFinancialProductCommand : IRequest<string>
     public Guid FinancialProductId { get; set; }
     public int Quantity { get; set; }
 
-    public class SellFinancialProductCommandHandler(ICustomerRepoitory customerRepository, IFinancialProductRepository financialProductRepository) : IRequestHandler<SellFinancialProductCommand, string>
+    public class SellFinancialProductCommandHandler(ICustomerRepository customerRepository, IFinancialProductRepository financialProductRepository) : IRequestHandler<SellFinancialProductCommand, string>
     {
 
         public async Task<string> Handle(SellFinancialProductCommand request, CancellationToken cancellationToken)
