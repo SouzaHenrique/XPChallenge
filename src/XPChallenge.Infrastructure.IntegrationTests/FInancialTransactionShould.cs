@@ -19,10 +19,10 @@ public class FInancialTransactionShould : IClassFixture<IntegrationTestShell>
         var financialTransaction = Shell.FixtureContainer.Fixture.Create<FinancialTransaction>();
 
         // Act
-        await SUT.Add(financialTransaction, Shell.CTS.Token).ConfigureAwait(false);
+        await SUT.Add(financialTransaction, Shell.CTS.Token);
 
         // Assert
-        var allFinancialTransactions = (await SUT.GetAll(Shell.CTS.Token).ConfigureAwait(false)).ToList();
+        var allFinancialTransactions = (await SUT.GetAll(Shell.CTS.Token)).ToList();
         allFinancialTransactions.Should().NotBeEmpty();
         allFinancialTransactions.Should().HaveCountGreaterThan(0);
     }
@@ -32,10 +32,10 @@ public class FInancialTransactionShould : IClassFixture<IntegrationTestShell>
     {
         // Arrange
         var financialTransaction = Shell.FixtureContainer.Fixture.Create<FinancialTransaction>();
-        await SUT.Add(financialTransaction, Shell.CTS.Token).ConfigureAwait(false);
+        await SUT.Add(financialTransaction, Shell.CTS.Token);
 
         // Act
-        var allFinancialTransactions = (await SUT.GetAll(Shell.CTS.Token).ConfigureAwait(false)).ToList();
+        var allFinancialTransactions = (await SUT.GetAll(Shell.CTS.Token)).ToList();
 
         // Assert
         allFinancialTransactions.Should().NotBeEmpty();
@@ -47,11 +47,11 @@ public class FInancialTransactionShould : IClassFixture<IntegrationTestShell>
     {
         // Arrange
         var financialTransaction = Shell.FixtureContainer.Fixture.Create<FinancialTransaction>();
-        await SUT.Add(financialTransaction, Shell.CTS.Token).ConfigureAwait(false);
+        await SUT.Add(financialTransaction, Shell.CTS.Token);
 
         // Act
-        var allFinancialTransactions = (await SUT.GetAll(Shell.CTS.Token).ConfigureAwait(false)).ToList();
-        var financialTransactionById = await SUT.GetById(allFinancialTransactions.First().Id, Shell.CTS.Token).ConfigureAwait(false);
+        var allFinancialTransactions = (await SUT.GetAll(Shell.CTS.Token)).ToList();
+        var financialTransactionById = await SUT.GetById(allFinancialTransactions.First().Id, Shell.CTS.Token);
 
         // Assert
         financialTransactionById.Should().NotBeNull();
@@ -63,21 +63,21 @@ public class FInancialTransactionShould : IClassFixture<IntegrationTestShell>
     {
         // Arrange
         var financialTransaction = Shell.FixtureContainer.Fixture.Create<FinancialTransaction>();
-        await SUT.Add(financialTransaction, Shell.CTS.Token).ConfigureAwait(false);
+        await SUT.Add(financialTransaction, Shell.CTS.Token);
 
         // Act
-        var allFinancialTransactions = (await SUT.GetAll(Shell.CTS.Token).ConfigureAwait(false)).ToList();
-        var financialTransactionById = await SUT.GetById(allFinancialTransactions.First().Id, Shell.CTS.Token).ConfigureAwait(false);
+        var allFinancialTransactions = (await SUT.GetAll(Shell.CTS.Token)).ToList();
+        var financialTransactionById = await SUT.GetById(allFinancialTransactions.First().Id, Shell.CTS.Token);
 
         // Update the transaction type from Sale to Purchase
         financialTransactionById = new FinancialTransaction(financialTransactionById.Id, TransactionTypeEnum.Purchase,
                                                             financialTransactionById.Quantity, financialTransactionById.UnitPrice,
                                                             financialTransactionById.TransactionDate, financialTransactionById.CustomerID);
 
-        await SUT.Update(financialTransactionById, Shell.CTS.Token).ConfigureAwait(false);
+        await SUT.Update(financialTransactionById, Shell.CTS.Token);
 
         // Assert
-        var updatedFinancialTransaction = await SUT.GetById(allFinancialTransactions.First().Id, Shell.CTS.Token).ConfigureAwait(false);
+        var updatedFinancialTransaction = await SUT.GetById(allFinancialTransactions.First().Id, Shell.CTS.Token);
         updatedFinancialTransaction.TransactionType.Should().Be(TransactionTypeEnum.Purchase);
     }
 
@@ -86,14 +86,14 @@ public class FInancialTransactionShould : IClassFixture<IntegrationTestShell>
     {
         // Arrange
         var financialTransaction = Shell.FixtureContainer.Fixture.Create<FinancialTransaction>();
-        await SUT.Add(financialTransaction, Shell.CTS.Token).ConfigureAwait(false);
+        await SUT.Add(financialTransaction, Shell.CTS.Token);
 
         // Act
-        var allFinancialTransactions = (await SUT.GetAll(Shell.CTS.Token).ConfigureAwait(false)).ToList();
-        await SUT.Delete(allFinancialTransactions.First().Id, Shell.CTS.Token).ConfigureAwait(false);
+        var allFinancialTransactions = (await SUT.GetAll(Shell.CTS.Token)).ToList();
+        await SUT.Delete(allFinancialTransactions.First().Id, Shell.CTS.Token);
 
         // Assert
-        var deletedFinancialTransaction = await SUT.GetById(allFinancialTransactions.First().Id, Shell.CTS.Token).ConfigureAwait(false);
+        var deletedFinancialTransaction = await SUT.GetById(allFinancialTransactions.First().Id, Shell.CTS.Token);
         deletedFinancialTransaction.Should().BeNull();
     }
 

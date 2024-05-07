@@ -17,10 +17,10 @@ public class CustomerRepositoryShould : IClassFixture<IntegrationTestShell>
         var customer = Shell.FixtureContainer.Fixture.Create<Customer>();
 
         // Act
-        await SUT.Add(customer, Shell.CTS.Token).ConfigureAwait(false);
+        await SUT.Add(customer, Shell.CTS.Token);
 
         // Assert
-        var allCustomers = (await SUT.GetAll(Shell.CTS.Token).ConfigureAwait(false)).ToList();
+        var allCustomers = (await SUT.GetAll(Shell.CTS.Token)).ToList();
         allCustomers.Should().NotBeEmpty();
         allCustomers.Should().HaveCountGreaterThan(0);
     }
@@ -30,10 +30,10 @@ public class CustomerRepositoryShould : IClassFixture<IntegrationTestShell>
     {
         // Arrange
         var customer = Shell.FixtureContainer.Fixture.Create<Customer>();
-        await SUT.Add(customer, Shell.CTS.Token).ConfigureAwait(false);
+        await SUT.Add(customer, Shell.CTS.Token);
 
         // Act
-        var allCustomers = (await SUT.GetAll(Shell.CTS.Token).ConfigureAwait(false)).ToList();
+        var allCustomers = (await SUT.GetAll(Shell.CTS.Token)).ToList();
 
         // Assert
         allCustomers.Should().NotBeEmpty();
@@ -45,11 +45,11 @@ public class CustomerRepositoryShould : IClassFixture<IntegrationTestShell>
     {
         // Arrange
         var customer = Shell.FixtureContainer.Fixture.Create<Customer>();
-        await SUT.Add(customer, Shell.CTS.Token).ConfigureAwait(false);
+        await SUT.Add(customer, Shell.CTS.Token);
 
         // Act
-        var allCustomers = (await SUT.GetAll(Shell.CTS.Token).ConfigureAwait(false)).ToList();
-        var customerById = await SUT.GetById(allCustomers.First().Id, Shell.CTS.Token).ConfigureAwait(false);
+        var allCustomers = (await SUT.GetAll(Shell.CTS.Token)).ToList();
+        var customerById = await SUT.GetById(allCustomers.First().Id, Shell.CTS.Token);
 
         // Assert
         customerById.Should().NotBeNull();
@@ -61,16 +61,16 @@ public class CustomerRepositoryShould : IClassFixture<IntegrationTestShell>
     {
         // Arrange
         var customer = Shell.FixtureContainer.Fixture.Create<Customer>();
-        await SUT.Add(customer, Shell.CTS.Token).ConfigureAwait(false);
+        await SUT.Add(customer, Shell.CTS.Token);
 
         // Act
-        var allCustomers = (await SUT.GetAll(Shell.CTS.Token).ConfigureAwait(false)).ToList();
-        var customerById = await SUT.GetById(allCustomers.First().Id, Shell.CTS.Token).ConfigureAwait(false);
+        var allCustomers = (await SUT.GetAll(Shell.CTS.Token)).ToList();
+        var customerById = await SUT.GetById(allCustomers.First().Id, Shell.CTS.Token);
         customerById.UpdateFirstName("UpdatedName");
-        await SUT.Update(customerById, Shell.CTS.Token).ConfigureAwait(false);
+        await SUT.Update(customerById, Shell.CTS.Token);
 
         // Assert
-        var updatedCustomer = await SUT.GetById(allCustomers.First().Id, Shell.CTS.Token).ConfigureAwait(false);
+        var updatedCustomer = await SUT.GetById(allCustomers.First().Id, Shell.CTS.Token);
         updatedCustomer.FirstName.Should().Be("UpdatedName");
     }
 
@@ -79,14 +79,14 @@ public class CustomerRepositoryShould : IClassFixture<IntegrationTestShell>
     {
         // Arrange
         var customer = Shell.FixtureContainer.Fixture.Create<Customer>();
-        await SUT.Add(customer, Shell.CTS.Token).ConfigureAwait(false);
+        await SUT.Add(customer, Shell.CTS.Token);
 
         // Act
-        var allCustomers = (await SUT.GetAll(Shell.CTS.Token).ConfigureAwait(false)).ToList();
-        await SUT.Delete(allCustomers.First().Id, Shell.CTS.Token).ConfigureAwait(false);
+        var allCustomers = (await SUT.GetAll(Shell.CTS.Token)).ToList();
+        await SUT.Delete(allCustomers.First().Id, Shell.CTS.Token);
 
         // Assert
-        var deletedCustomer = await SUT.GetById(allCustomers.First().Id, Shell.CTS.Token).ConfigureAwait(false);
+        var deletedCustomer = await SUT.GetById(allCustomers.First().Id, Shell.CTS.Token);
         deletedCustomer.Should().BeNull();
     }
 }

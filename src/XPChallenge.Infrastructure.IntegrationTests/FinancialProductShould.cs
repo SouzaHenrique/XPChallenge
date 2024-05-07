@@ -17,10 +17,10 @@ public class FinancialProductShould : IClassFixture<IntegrationTestShell>
         var financialProduct = Shell.FixtureContainer.Fixture.Create<FinancialProduct>();
 
         // Act
-        await SUT.Add(financialProduct, Shell.CTS.Token).ConfigureAwait(false);
+        await SUT.Add(financialProduct, Shell.CTS.Token);
 
         // Assert
-        var allFinancialProducts = (await SUT.GetAll(Shell.CTS.Token).ConfigureAwait(false)).ToList();
+        var allFinancialProducts = (await SUT.GetAll(Shell.CTS.Token)).ToList();
         allFinancialProducts.Should().NotBeEmpty();
         allFinancialProducts.Should().HaveCountGreaterThan(0);
     }
@@ -30,10 +30,10 @@ public class FinancialProductShould : IClassFixture<IntegrationTestShell>
     {
         // Arrange
         var financialProduct = Shell.FixtureContainer.Fixture.Create<FinancialProduct>();
-        await SUT.Add(financialProduct, Shell.CTS.Token).ConfigureAwait(false);
+        await SUT.Add(financialProduct, Shell.CTS.Token);
 
         // Act
-        var allFinancialProducts = (await SUT.GetAll(Shell.CTS.Token).ConfigureAwait(false)).ToList();
+        var allFinancialProducts = (await SUT.GetAll(Shell.CTS.Token)).ToList();
 
         // Assert
         allFinancialProducts.Should().NotBeEmpty();
@@ -45,11 +45,11 @@ public class FinancialProductShould : IClassFixture<IntegrationTestShell>
     {
         // Arrange
         var financialProduct = Shell.FixtureContainer.Fixture.Create<FinancialProduct>();
-        await SUT.Add(financialProduct, Shell.CTS.Token).ConfigureAwait(false);
+        await SUT.Add(financialProduct, Shell.CTS.Token);
 
         // Act
-        var allFinancialProducts = (await SUT.GetAll(Shell.CTS.Token).ConfigureAwait(false)).ToList();
-        var financialProductById = await SUT.GetById(allFinancialProducts.First().Id, Shell.CTS.Token).ConfigureAwait(false);
+        var allFinancialProducts = (await SUT.GetAll(Shell.CTS.Token)).ToList();
+        var financialProductById = await SUT.GetById(allFinancialProducts.First().Id, Shell.CTS.Token);
 
         // Assert
         financialProductById.Should().NotBeNull();
@@ -61,16 +61,16 @@ public class FinancialProductShould : IClassFixture<IntegrationTestShell>
     {
         // Arrange
         var financialProduct = Shell.FixtureContainer.Fixture.Create<FinancialProduct>();
-        await SUT.Add(financialProduct, Shell.CTS.Token).ConfigureAwait(false);
+        await SUT.Add(financialProduct, Shell.CTS.Token);
 
         // Act
-        var allFinancialProducts = (await SUT.GetAll(Shell.CTS.Token).ConfigureAwait(false)).ToList();
-        var financialProductById = await SUT.GetById(allFinancialProducts.First().Id, Shell.CTS.Token).ConfigureAwait(false);
+        var allFinancialProducts = (await SUT.GetAll(Shell.CTS.Token)).ToList();
+        var financialProductById = await SUT.GetById(allFinancialProducts.First().Id, Shell.CTS.Token);
         financialProductById.UpdateName("Updated Name");
-        await SUT.Update(financialProductById, Shell.CTS.Token).ConfigureAwait(false);
+        await SUT.Update(financialProductById, Shell.CTS.Token);
 
         // Assert
-        var updatedFinancialProduct = await SUT.GetById(allFinancialProducts.First().Id, Shell.CTS.Token).ConfigureAwait(false);
+        var updatedFinancialProduct = await SUT.GetById(allFinancialProducts.First().Id, Shell.CTS.Token);
         updatedFinancialProduct.Name.Should().Be("Updated Name");
     }
 
@@ -79,14 +79,14 @@ public class FinancialProductShould : IClassFixture<IntegrationTestShell>
     {
         // Arrange
         var financialProduct = Shell.FixtureContainer.Fixture.Create<FinancialProduct>();
-        await SUT.Add(financialProduct, Shell.CTS.Token).ConfigureAwait(false);
+        await SUT.Add(financialProduct, Shell.CTS.Token);
 
         // Act
-        var allFinancialProducts = (await SUT.GetAll(Shell.CTS.Token).ConfigureAwait(false)).ToList();
-        await SUT.Delete(allFinancialProducts.First().Id, Shell.CTS.Token).ConfigureAwait(false);
+        var allFinancialProducts = (await SUT.GetAll(Shell.CTS.Token)).ToList();
+        await SUT.Delete(allFinancialProducts.First().Id, Shell.CTS.Token);
 
         // Assert
-        var deletedFinancialProduct = await SUT.GetById(allFinancialProducts.First().Id, Shell.CTS.Token).ConfigureAwait(false);
+        var deletedFinancialProduct = await SUT.GetById(allFinancialProducts.First().Id, Shell.CTS.Token);
         deletedFinancialProduct.Should().BeNull();
     }
 }
