@@ -20,7 +20,7 @@ public class FinancialProductGenerator : ISpecimenBuilder
         if (type is not null && type != typeof(FinancialProduct))
             return new NoSpecimen();
 
-        var output = new FinancialProduct(Guid.Empty, _fixture.Create<string>(), _fixture.Create<decimal>(), DateTime.Now.AddDays(30));
+        var output = new FinancialProduct(Guid.Empty, _fixture.Create<string>(), _fixture.Create<double>(), DateTime.Now.AddDays(30));
 
         return output;
     }
