@@ -3,7 +3,7 @@
     - Sobrescrever valores de configuração 'AppMailSenderOptions' (utilizando no momento mailtrap)
 
 - Como executar :
-  - instalar mongodb
+  - instalar e executar mongodb (https://www.mongodb.com/docs/manual/installation/)
   - executar aplicação
 
 - Como utilizar :
