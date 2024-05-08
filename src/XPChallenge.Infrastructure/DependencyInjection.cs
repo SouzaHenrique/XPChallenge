@@ -1,8 +1,3 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-
-
 namespace XPChallenge.Infrastructure;
 public static class DependencyInjection
 {
@@ -13,26 +8,8 @@ public static class DependencyInjection
         //add mongo client
         services.AddSingleton<IMongoClient>(s =>
         {
-#if DEBUG
-            var debuggerClient = new MongoClient(new MongoClientSettings()
-            {
-                Server = new MongoServerAddress("localhost"),
-
-                ClusterConfigurator = cb =>
-                {
-                    cb.Subscribe<CommandStartedEvent>(e =>
-                    {
-                        System.Diagnostics.Trace.WriteLine($"{e.CommandName} - {e.Command}");
-                    });
-                }
-            });
-
-            return debuggerClient;
-#endif
-
             IMongoClient mongoclient = new MongoClient(mongoConnection);
             return mongoclient;
-
         });
 
         //add mongo database

@@ -1,10 +1,18 @@
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
 
 namespace XPChallenge.Infrastructure.Persistance;
 public static class MongoClassMapers
 {
     public static void RegisterMaps()
     {
+#pragma warning disable CS0618
+        BsonDefaults.GuidRepresentation = GuidRepresentation.Standard;
+        BsonDefaults.GuidRepresentationMode = GuidRepresentationMode.V3;
+#pragma warning restore CS0618
+        BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
+
         if (!BsonClassMap.IsClassMapRegistered(typeof(Customer)))
         {
             BsonClassMap.TryRegisterClassMap<Customer>(c =>
@@ -14,7 +22,7 @@ public static class MongoClassMapers
                 c.MapProperty(x => x.Balance);
                 c.MapProperty(x => x.PurchasedProducts);
                 c.MapCreator(x => new Customer(x.Id, x.FirstName, x.LastName, x.Balance, x.PurchasedProducts));
-            }); 
+            });
         }
 
         if (!BsonClassMap.IsClassMapRegistered(typeof(FinancialProduct)))
@@ -25,7 +33,7 @@ public static class MongoClassMapers
                 p.MapProperty(x => x.CurrentPurchasePrice);
                 p.MapProperty(x => x.DueDate);
                 p.MapCreator(x => new FinancialProduct(x.Id, x.Name, x.CurrentPurchasePrice, x.DueDate));
-            }); 
+            });
         }
 
         if (!BsonClassMap.IsClassMapRegistered(typeof(FinancialTransaction)))

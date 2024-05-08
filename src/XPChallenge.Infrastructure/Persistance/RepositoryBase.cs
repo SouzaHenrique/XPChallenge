@@ -25,10 +25,9 @@ public class RepositoryBase<T>(IMongoDatabase mongoDatabase) : IGenericRepositor
         return Task.FromResult(result);
     }
 
-    public Task<T> GetById(Guid id, CancellationToken cancellationToken)
+    public async Task<T> GetById(Guid id, CancellationToken cancellationToken)
     {
-        var filter = Builders<T>.Filter.Eq(x => x.Id, id);
-        return _collection.Find(filter).FirstOrDefaultAsync(cancellationToken);
+        return await _collection.AsQueryable().Where(x => x.Id == id).FirstOrDefaultAsync();
     }
 
     public Task<IQueryable<T>> GetPagedReponse(int page, int size, CancellationToken cancellationToken)

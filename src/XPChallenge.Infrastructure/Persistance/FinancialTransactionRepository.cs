@@ -1,3 +1,4 @@
+using Microsoft.VisualBasic;
 using MongoDB.Driver.Linq;
 using XPChallenge.Domain.Commom.Models;
 
@@ -35,7 +36,9 @@ public class FinancialTransactionRepository : RepositoryBase<FinancialTransactio
             TotalQuantityPurchased = purchases?.TotalQuantity,
             TotalAmountPurchased = purchases?.TotalAmount,
             TotalQuantitySold = sales?.TotalQuantity,
-            TotalAmountSold = sales?.TotalAmount
+            TotalAmountSold = sales?.TotalAmount,
+            CurrentPrice = financialProduct.CurrentPurchasePrice,
+            DueDate = financialProduct.DueDate
         };
     }
 }
