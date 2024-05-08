@@ -5,7 +5,7 @@ namespace XPChallenge.Application.Features.Customer.Commands;
 public class UpdateCustomerBalanceCommand : IRequest<string>
 {
     public Guid Id  { get; set; }
-    public decimal Amount { get; set; }
+    public double Amount { get; set; }
 
     public void MapToEntity(Domain.Entities.Customer customer)
     {

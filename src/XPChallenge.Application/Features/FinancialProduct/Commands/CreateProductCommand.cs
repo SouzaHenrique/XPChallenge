@@ -5,7 +5,7 @@ namespace XPChallenge.Application.Features.FinancialProduct.Commands;
 public class CreateProductCommand : IRequest<CreateProductResponse>
 {
     public string Name { get; set; }
-    public decimal CurrentPurchasePrice { get; set; }
+    public double CurrentPurchasePrice { get; set; }
     public DateTime DueDate { get; set; }
 
     public Domain.Entities.FinancialProduct MapToEntity()

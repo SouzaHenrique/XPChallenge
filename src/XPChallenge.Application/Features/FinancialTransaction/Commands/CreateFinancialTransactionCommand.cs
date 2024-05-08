@@ -6,7 +6,7 @@ public class CreateFinancialTransactionCommand : IRequest<FinancialTransactionRe
 {
     public Guid FinancialProductID { get; set; }
     public int Quantity { get; set; }
-    public decimal UnitPrice { get; set; }
+    public double UnitPrice { get; set; }
     public Domain.Enums.TransactionTypeEnum TransactionType { get; set; }
     public Guid CustomerId { get; set; }
 

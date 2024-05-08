@@ -6,7 +6,7 @@ public class CreateCustomerCommand : IRequest<CreateCustomerResponse>
 {
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
-    public decimal Balance { get; set; }
+    public double Balance { get; set; }
 
     public Domain.Entities.Customer MapToEntity()
     {
