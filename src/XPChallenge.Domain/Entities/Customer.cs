@@ -4,10 +4,10 @@ public class Customer : DomainEntity
 {
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
-    public decimal Balance { get; private set; }
+    public double Balance { get; private set; }
     public IEnumerable<PurchasedProductValueObject> PurchasedProducts { get; private set; }
 
-    public Customer(string firstName, string lastName, decimal balance, IEnumerable<PurchasedProductValueObject> purchasedProducts)
+    public Customer(string firstName, string lastName, double balance, IEnumerable<PurchasedProductValueObject> purchasedProducts)
     {
         FirstName = firstName;
         LastName = lastName;
@@ -16,7 +16,7 @@ public class Customer : DomainEntity
     }
 
     [BsonConstructor]
-    public Customer(Guid id, string firstName, string lastName, decimal balance, IEnumerable<PurchasedProductValueObject> purchasedProducts)
+    public Customer(Guid id, string firstName, string lastName, double balance, IEnumerable<PurchasedProductValueObject> purchasedProducts)
     {
         Id = id;
         FirstName = firstName;
@@ -43,7 +43,7 @@ public class Customer : DomainEntity
         }
     }
 
-    public void SellFinancialProduct(Guid financialProductID, int quantity, decimal pricePerUnit)
+    public void SellFinancialProduct(Guid financialProductID, int quantity, double pricePerUnit)
     {
         PurchasedProducts ??= [];
 
@@ -61,7 +61,7 @@ public class Customer : DomainEntity
         }
     }
 
-    public void IncreaseBalanceIn(decimal amount)
+    public void IncreaseBalanceIn(double amount)
     {
         if (Balance <= 0)
         {

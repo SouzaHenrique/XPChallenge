@@ -7,12 +7,12 @@ public class FinancialTransaction : DomainEntity
     public Guid CustomerID { get; private set; }
     public TransactionTypeEnum  TransactionType { get; private set; }
     public int Quantity { get; private set; }
-    public decimal UnitPrice { get; private set; }
+    public double UnitPrice { get; private set; }
     public DateTime TransactionDate { get; private set; }
 
     public FinancialTransaction(Guid financialProductId,
                                 TransactionTypeEnum transactionType, int quantity,
-                                decimal unitPrice, DateTime transactionDate, Guid customerID)
+                                double unitPrice, DateTime transactionDate, Guid customerID)
     {
         FinancialProductID = financialProductId;
         TransactionType = transactionType;
@@ -25,7 +25,7 @@ public class FinancialTransaction : DomainEntity
     [BsonConstructor]
     public FinancialTransaction(Guid id, Guid financialProductId,
                                 TransactionTypeEnum transactionType, int quantity,
-                                decimal unitPrice, DateTime transactionDate, Guid customerID)
+                                double unitPrice, DateTime transactionDate, Guid customerID)
     {
         Id = id;
         FinancialProductID = financialProductId;

@@ -4,10 +4,10 @@ namespace XPChallenge.Domain.Entities;
 public class FinancialProduct : DomainEntity
 {
     public string Name { get; private set; }
-    public decimal CurrentPurchasePrice { get; private set; }
+    public double CurrentPurchasePrice { get; private set; }
     public DateTime DueDate { get; private set; }
 
-    public FinancialProduct(string name, decimal currentValue, DateTime dueDate)
+    public FinancialProduct(string name, double currentValue, DateTime dueDate)
     {
         Name = name;
         CurrentPurchasePrice = currentValue;
@@ -15,7 +15,7 @@ public class FinancialProduct : DomainEntity
     }
 
     [BsonConstructor]
-    public FinancialProduct(Guid id, string name, decimal purchasePrice, DateTime dueDate)
+    public FinancialProduct(Guid id, string name, double purchasePrice, DateTime dueDate)
     {
         Id = id;
         Name = name;
@@ -23,7 +23,7 @@ public class FinancialProduct : DomainEntity
         DueDate = dueDate;
     }
 
-    public void UpdateCurrentValue(decimal currentValue)
+    public void UpdateCurrentValue(double currentValue)
     {
         CurrentPurchasePrice = currentValue;
     }
