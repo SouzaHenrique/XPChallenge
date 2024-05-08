@@ -1,6 +1,7 @@
 - Como Configurar:
   - utilizar arquivo de configuração do projecto 'XPChallenge.WebAPI' para:
-    - Sobrescrever valores de configuração 'AppMailSenderOptions' (utilizando no momento mailtrap)
+    - Sobrescrever valores de configuração 'AppMailSenderOptions' (utilizando no momento mailtrap),
+      para configurar funcionalidade de envio diário de emails sobre produtos vencidos
 
 - Como executar :
   - instalar e executar mongodb (https://www.mongodb.com/docs/manual/installation/)
