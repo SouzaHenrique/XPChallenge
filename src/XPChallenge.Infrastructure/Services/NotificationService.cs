@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Mail;
 using XPChallenge.Application.Commom.Contracts;
+using XPChallenge.Application.Commom.Models.ApplicationMailSenderOptions;
 
 namespace XPChallenge.Infrastructure.Services;
 public class NotificationService(IAppOptionsService appOptionsService) : INotificationService
@@ -9,8 +10,8 @@ public class NotificationService(IAppOptionsService appOptionsService) : INotifi
     public Task SendEmailAsync(string toEmail, string subject, string htmlMessage)
     {
         // Get SMTP and mail message options from the AppOptionsService
-        var smtpOptions = appOptionsService.GetAppMailSenderOptions().SmtpClientOptions;
-        var mailMessageOptions = appOptionsService.GetAppMailSenderOptions().MailMessageOptions;
+        SmtpClientOptions smtpOptions = appOptionsService.GetAppMailSenderOptions().SmtpClientOptions;
+        MailMessageOptions mailMessageOptions = appOptionsService.GetAppMailSenderOptions().MailMessageOptions;
 
         // Create MailAddress for sender and recipient
         var from = new MailAddress(mailMessageOptions.From);
@@ -35,7 +36,7 @@ public class NotificationService(IAppOptionsService appOptionsService) : INotifi
             if (!smtpOptions.UseDefaultCredentials)
             {
                 client.UseDefaultCredentials = false;
-                client.Credentials = new NetworkCredential(smtpOptions.CredentialsOptions.UserName, smtpOptions.CredentialsOptions.Password, smtpOptions.CredentialsOptions.Domain);
+                client.Credentials = new NetworkCredential(smtpOptions.CredentialsOptions.UserName, smtpOptions.CredentialsOptions.Password);
             }
 
             // Configure SMTP client settings
@@ -45,7 +46,7 @@ public class NotificationService(IAppOptionsService appOptionsService) : INotifi
 
             // Send the email using the configured SMTP client
             //TODO: Uncomment client.Send(message) when the system is in production.
-            //client.Send(message);
+            client.Send(message);
         }
 
         return Task.CompletedTask; // Return a completed Task to satisfy the asynchronous method signature

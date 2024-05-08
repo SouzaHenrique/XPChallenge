@@ -3,6 +3,8 @@ using MediatR.NotificationPublishers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using XPChallenge.Application.Commom.Models.ApplicationMailSenderOptions;
+using XPChallenge.Application.Contracts;
+using XPChallenge.Application.Services;
 
 namespace XPChallenge.Application;
 public static class DependencyInjection
@@ -14,9 +16,6 @@ public static class DependencyInjection
             config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
             config.NotificationPublisher = new TaskWhenAllPublisher();
         });
-
-        services.Configure<AppMailSenderOptions>(configuration.GetSection(AppMailSenderOptions.Section));
-
 
         return services;
     }

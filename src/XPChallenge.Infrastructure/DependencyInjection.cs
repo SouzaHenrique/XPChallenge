@@ -1,9 +1,39 @@
+using Hangfire;
+using Hangfire.Mongo;
+using Hangfire.Mongo.Migration.Strategies;
+using Hangfire.Mongo.Migration.Strategies.Backup;
+using XPChallenge.Application.Commom.Contracts;
+using XPChallenge.Application.Commom.Models;
+using XPChallenge.Application.Commom.Models.ApplicationMailSenderOptions;
+using XPChallenge.Application.Contracts;
+using XPChallenge.Application.Services;
+using XPChallenge.Infrastructure.Services;
+
 namespace XPChallenge.Infrastructure;
 public static class DependencyInjection
 {
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         var mongoConnection = configuration.GetConnectionString("mongodb");
+
+        //add hangfire
+        var mongoMigrationOptions = new MongoMigrationOptions
+        {
+            MigrationStrategy = new MigrateMongoMigrationStrategy(),
+            BackupStrategy = new NoneMongoBackupStrategy()
+        };
+        services.AddHangfire(globalConfiguration => globalConfiguration
+            .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+            .UseSimpleAssemblyNameTypeSerializer()
+            .UseRecommendedSerializerSettings()
+            .UseMongoStorage(mongoConnection, "HangFireXPChallenge",
+            new MongoStorageOptions
+            {
+                MigrationOptions = mongoMigrationOptions,
+                CheckQueuedJobsStrategy = CheckQueuedJobsStrategy.TailNotificationsCollection
+            }));
+
+        services.AddHangfireServer();
 
         //add mongo client
         services.AddSingleton<IMongoClient>(s =>
@@ -21,6 +51,14 @@ public static class DependencyInjection
         });
 
         services.AddRepositories();
+
+
+        services.Configure<AppOptions>(configuration.GetSection(AppOptions.Section));
+        services.Configure<AppMailSenderOptions>(configuration.GetSection(AppMailSenderOptions.Section));
+
+        services.AddScoped<IAppOptionsService, AppOptionsService>();
+        services.AddScoped<INotificationService, NotificationService>();
+        services.AddScoped<IExpiredProductsService,ExpiredProductsService>();
 
         MongoClassMapers.RegisterMaps();
     }

@@ -1,3 +1,7 @@
+using Hangfire;
+using XPChallenge.Application.Contracts;
+using XPChallenge.Application.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHealthChecks();
@@ -14,6 +18,17 @@ XPChallenge.Application.DependencyInjection.AddApplication(builder.Services, bui
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    //var recurringJobManager = scope.ServiceProvider.GetRequiredService<IRecurringJobManager>();
+    //var expiredProductsService = scope.ServiceProvider.GetRequiredService<ExpiredProductsService>();
+    //recurringJobManager.AddOrUpdate<ExpiredProductsService>("CheckForExpiredProductsAndNotify", x => expiredProductsService.CheckForExpiredProductsAndNotify(), Cron.Daily);
+
+    IBackgroundJobClient backgroundJobClient = scope.ServiceProvider.GetRequiredService<IBackgroundJobClient>();
+    var expiredProductsService = scope.ServiceProvider.GetRequiredService<IExpiredProductsService>();
+    backgroundJobClient.Enqueue<ExpiredProductsService>(x => expiredProductsService.CheckForExpiredProductsAndNotify("hszm2094@gmail.com"));
+}
+
 app.MapHealthChecks("/health");
 
 // Configure the HTTP request pipeline.
@@ -25,7 +40,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
 app.MapControllers();
 
