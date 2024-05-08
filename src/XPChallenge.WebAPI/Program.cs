@@ -10,7 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 XPChallenge.Infrastructure.DependencyInjection.AddInfrastructure(builder.Services, builder.Configuration);
-XPChallenge.Application.DependencyInjection.AddApplication(builder.Services);
+XPChallenge.Application.DependencyInjection.AddApplication(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 
