@@ -7,11 +7,14 @@ public static class MongoClassMapers
 {
     public static void RegisterMaps()
     {
-#pragma warning disable CS0618
-        BsonDefaults.GuidRepresentation = GuidRepresentation.Standard;
-        BsonDefaults.GuidRepresentationMode = GuidRepresentationMode.V3;
-#pragma warning restore CS0618
-        BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
+        try
+        {
+            BsonSerializer.TryRegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
+
+        }
+        catch (BsonSerializationException)
+        {
+        }
 
         if (!BsonClassMap.IsClassMapRegistered(typeof(Customer)))
         {
